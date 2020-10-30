@@ -51,7 +51,6 @@ def minor(A,i,j):    # Return matrix A with the ith row and jth column deleted
   return minor
 
 
-
 def getMatrix(message):
     coloumn = m
     row = int(len(message)/m)

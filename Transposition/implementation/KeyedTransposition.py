@@ -8,10 +8,13 @@ def messageValidation(message):
             sys.exit("The key should be greater than or equal to zero!!")
 
 def setUpMessage(message,m):
-    nearest_int = int(len(message)/m)
+    if len(message)%m == 0:
+        return message
+    message_length = len(message)
+    nearest_int = int(message_length/m)
     new_message_length = (nearest_int + 1)*m
     i = 0
-    while i < (int(new_message_length - len(message))):
+    while i < (int(new_message_length - message_length)):
         message += "z"
         i += 1
     return message
@@ -46,7 +49,7 @@ def decrypt(keys,message):
     return plainText
 
 def main():
-    message = "enemyattackstonight"  #gt pt
+    message = "indiaismycountry"  #gt pt
     key = [3, 1, 4, 5, 2]         #gtkeys
     messageValidation(message)
     message = setUpMessage(message,len(key))
