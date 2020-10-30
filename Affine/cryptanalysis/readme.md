@@ -12,7 +12,7 @@ ChosenPT:
         4. The cipher texts corresponding to that plaintext should be given as "CipherText_corresponding_to_CT1 = <input value for CipherText_corresponding_to_CT1>" and similarly for CipherText_corresponding_to_CT2, but in the next line
         5. The output will be showing both the keys and the decryption of the message
     
-ChosenPT:
+Statistical:
   Implemented this attack with the help of a frequency dictionary text file found online. That was used as a reference for the english frequency characters.
     Input : ./statistical/input.txt
     Output : ./statistical/output.txt  
