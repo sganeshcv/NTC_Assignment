@@ -49,11 +49,11 @@ def main():
     with open (file_input, 'rt') as myfile:
         for line in myfile:
             if line.find("messgae") != -1:    
-                message = line.rstrip('\n').split(" =")[1]
+                message = line.rstrip('\n').split(" = ")[1]
             elif line.find("key1") != -1:
-                key1 = int(line.rstrip('\n').split(" =")[1])
+                key1 = int(line.rstrip('\n').split(" = ")[1])
             elif line.find("key2") != -1:
-                key2 = int(line.rstrip('\n').split(" =")[1])
+                key2 = int(line.rstrip('\n').split(" = ")[1])
 
     fout = open(file_output, "w+")
 

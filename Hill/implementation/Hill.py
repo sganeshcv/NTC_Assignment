@@ -1,22 +1,24 @@
 import numpy as np
 import math
 import sys
+
+file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Hill/implementation/Hill/input.txt"
+file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Hill/implementation/Hill/output.txt"
+
 CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
 
-m = 4
 def mod26(num):
     return (num%26)
 
-def setUpMessage(message):
-    message_length = len(message)
-    nearest_int = int(message_length/m)
-    new_message_length = (nearest_int + 1)*m
-    i = 0
-    while i < (int(new_message_length - message_length)):
-        message += "z"
-        i += 1
-    return message
-
+def setUpMessage(message, m):
+  message_length = len(message)
+  nearest_int = int(message_length/m)
+  new_message_length = (nearest_int + 1)*m
+  i = 0
+  while i < (int(new_message_length - message_length)):
+      message += "z"
+      i += 1
+  return message
 
 def mod26MatInv(A):       # Finds the inverse of matrix A mod p
   n = len(A)
@@ -50,55 +52,58 @@ def minor(A,i,j):    # Return matrix A with the ith row and jth column deleted
     p=p+1
   return minor
 
-
-def getMatrix(message):
-    coloumn = m
-    row = int(len(message)/m)
-    keyMatrix = np.zeros((row,coloumn)) #numberize
-    c = 0
-    for i in range(row):
-        for j in range(coloumn):
-            keyMatrix[i][j] = CHARACTERS.find(message[c])
-            c += 1
-    return keyMatrix
+def getMatrix(message,m):
+  coloumn = m
+  row = int(len(message)/m)
+  keyMatrix = np.zeros((row,coloumn)) #numberize
+  c = 0
+  for i in range(row):
+      for j in range(coloumn):
+          keyMatrix[i][j] = CHARACTERS.find(message[c])
+          c += 1
+  return keyMatrix
 
 def getText(message):
-    messgaeText = ""
-    row = message.shape[0]
-    coloumn = message.shape[1]
-    for i in range(row):
-        for j in range(coloumn):
-            messgaeText += CHARACTERS[mod26(int(message[i][j]))]
-    return messgaeText
+  messgaeText = ""
+  row = message.shape[0]
+  coloumn = message.shape[1]
+  for i in range(row):
+      for j in range(coloumn):
+          messgaeText += CHARACTERS[mod26(int(message[i][j]))]
+  return messgaeText
 
+def encrypt(key,message,m):
+  keyMatrix = key#getMatrix(key)
+  messageVector = getMatrix(message,m)     # numberize
+  cipherMatrix = np.dot(messageVector,keyMatrix)
+  return getText(cipherMatrix)
 
-def encrypt(key,message):
-    keyMatrix = key#getMatrix(key)
-    messageVector = getMatrix(message)     # numberize
-    cipherMatrix = np.dot(messageVector,keyMatrix)
-    return getText(cipherMatrix)
-
-
-
-def decrypt(key, message):
-    keyMatrix = key#keyMatrix = getMatrix(key)
-    keyMatrixInverse = mod26MatInv(keyMatrix)
-    messageVector = getMatrix(message)
-    plainText = np.dot(messageVector,keyMatrixInverse)
-    return getText(plainText)
-
-
+def decrypt(key, message,m):
+  keyMatrix = key#keyMatrix = getMatrix(key)
+  keyMatrixInverse = mod26MatInv(keyMatrix)
+  messageVector = getMatrix(message,m)
+  plainText = np.dot(messageVector,keyMatrixInverse)
+  return getText(plainText)
 
 def main():
-    #get key dim
-    key = [[9, 7, 11, 13], [4, 7, 5, 6], [2, 21, 14, 9], [3, 23, 21, 8]]#get key
-    message = "codeisready"#get message
-    modified_message = setUpMessage(message)
-    print(modified_message)
-    cipherText = encrypt(key,modified_message)
-    print(cipherText)
-    plainText = decrypt(key,cipherText)
-    print(plainText)
+  with open (file_input, 'rt') as myfile:
+      for line in myfile:
+          if line.find("key_dimension") != -1:    
+              key_dimension = int(line.rstrip('\n').split(" = ")[1])
+          elif line.find("key") != -1:
+              key_text = (line.rstrip('\n').split(" = ")[1])
+          elif line.find("message") != -1:
+              message = (line.rstrip('\n').split(" = ")[1])
+  fout = open(file_output, "w+")
+  key = getMatrix(key_text,key_dimension)
+  modified_message = setUpMessage(message,key_dimension)
+  cipherText = encrypt(key,modified_message,key_dimension)
+  print(cipherText.upper())
+  fout.write(cipherText.upper())
+  fout.write("\n")
+  plainText = decrypt(key,cipherText,key_dimension)
+  print(plainText)
+  fout.write(plainText)
     
 if __name__ == "__main__":
-    main()
+  main()

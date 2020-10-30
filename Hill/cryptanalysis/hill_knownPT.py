@@ -1,13 +1,16 @@
 import numpy as np
 import math
 import sys
+
+file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Hill/cryptanalysis/knownPT/input.txt"
+file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Hill/cryptanalysis/knownPT/output.txt"
+
 CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
 
-m = 3
 def mod26(num):
     return (num%26)
 
-def setUpMessage(message):
+def setUpMessage(message,m):
     message_length = len(message)
     nearest_int = int(message_length/m)
     new_message_length = (nearest_int + 1)*m
@@ -50,7 +53,7 @@ def minor(A,i,j):    # Return matrix A with the ith row and jth column deleted
     p=p+1
   return minor
 
-def getMatrix(message):
+def getMatrix(message,m):
     coloumn = m
     row = int(len(message)/m)
     keyMatrix = np.zeros((row,coloumn)) #numberize
@@ -70,17 +73,24 @@ def getText(message):
             messgaeText += CHARACTERS[mod26(int(message[i][j]))]
     return messgaeText
 
-def getKetKnowPTAttack(plainText,cipherText):
-  plainTextMatrix = getMatrix(plainText)
-  cipherTextMatrix = getMatrix(cipherText)
+def getKetKnowPTAttack(plainText,cipherText,m):
+  plainTextMatrix = getMatrix(plainText,m)
+  cipherTextMatrix = getMatrix(cipherText,m)
   return np.dot(mod26MatInv(plainTextMatrix), cipherTextMatrix)
 
 def main():
-    plainText = "fhknrhafe"
-    cipherText = "dgaoqjdrl"
-
-    key = mod26(getKetKnowPTAttack(plainText,cipherText)).astype(int)
-    print(key)
+  with open (file_input, 'rt') as myfile:
+    for line in myfile:
+        if line.find("key_dimension") != -1:    
+            key_dimension = int(line.rstrip('\n').split(" = ")[1])
+        elif line.find("plainText") != -1:
+            plainText = (line.rstrip('\n').split(" = ")[1])
+        elif line.find("cipherText") != -1:
+            cipherText = (line.rstrip('\n').split(" = ")[1]).lower()
+  fout = open(file_output, "w+")    
+  key = mod26(getKetKnowPTAttack(plainText,cipherText,key_dimension)).astype(int)
+  print(key)
+  fout.write(str(key))
 
     
 if __name__ == "__main__":

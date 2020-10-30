@@ -1,0 +1,3 @@
+key_dimension = 3
+plainText = fhknrhafe
+cipherText = DGAOQJDRL
