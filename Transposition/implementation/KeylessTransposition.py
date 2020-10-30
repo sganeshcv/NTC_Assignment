@@ -1,7 +1,7 @@
 import numpy as np
 import math
 import sys
-CHARACTERS = "abcdefghijklmnopqrstuvwxyz*"  
+CHARACTERS = "abcdefghijklmnopqrstuvwxyz"  
 
 def setUpMessage(message,m):
     if len(message)%m == 0:
@@ -60,7 +60,7 @@ def main():
     m = 4
     message = "meetmeatthepark"    #get message
     cipherText = encrypt(message,m)
-    print(cipherText)
+    print(cipherText.upper())
     plainText = decrypt(cipherText,m)
     print(plainText)
     
