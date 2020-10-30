@@ -1,0 +1,4 @@
+message = PWUFFOGWCHFDWIWEJOUUNJORSMDWRHVCMWJUPVCCG
+chosen_plainText = et
+CipherText_corresponding_to_CT1 = WC
+CipherText_corresponding_to_CT2 = WF

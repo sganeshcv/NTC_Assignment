@@ -2,6 +2,9 @@ from heapq import nlargest
 # from sage import *
 import numpy as np
 
+file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Affine/cryptanalysis/chosenPT/input.txt"
+file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Affine/cryptanalysis/chosenPT/output.txt"
+
 CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
 TOTAL_CHARACTERS = 4374127904
 
@@ -62,10 +65,18 @@ def decrypt(keys,message):
     return plainText
 
 def main():
-    message = "PWUFFOGWCHFDWIWEJOUUNJORSMDWRHVCMWJUPVCCG"  #gt pt
-    chosen_plainText = "et"  #gt pt
-    CipherText_corresponding_to_CT1 = "WC"  #gt ct in caps
-    CipherText_corresponding_to_CT2 = "WF"  #gt ct in caps
+    with open (file_input, 'rt') as myfile:
+        for line in myfile:
+            if line.lower().find("message") != -1:    # if case-insensitive match,
+                message = line.rstrip('\n').split(" = ")[1]
+            elif line.find("chosen_plainText") != -1:
+                chosen_plainText = line.rstrip('\n').split(" = ")[1]
+            elif line.find("CipherText_corresponding_to_CT1") != -1:
+                CipherText_corresponding_to_CT1 = line.rstrip('\n').split(" = ")[1]
+            elif line.find("CipherText_corresponding_to_CT2") != -1:
+                CipherText_corresponding_to_CT2 = line.rstrip('\n').split(" = ")[1]
+      
+    fout = open(file_output, "w+")
     
     matrix_A = [[CHARACTERS.find(chosen_plainText[0]), 1], [CHARACTERS.find(chosen_plainText[1]), 1]]
     matrix_B = [[CHARACTERS.upper().find(CipherText_corresponding_to_CT1[0])],[CHARACTERS.upper().find(CipherText_corresponding_to_CT1[1])]]
@@ -78,11 +89,15 @@ def main():
     key22 = int(mod(matrix_key2)[1])
     if key11 in KEYDOMAIN:
         print("Key1 : {} \nKey2 : {}".format(key11,key21))
+        fout.write(str("Key1 : {} \nKey2 : {}\n".format(key11,key21)))
         print(decrypt([key11,key21],message))
+        fout.write(decrypt([key11,key21],message))
         #break
     elif key12 in KEYDOMAIN:
             print("Key1 : {} \nKey2 : {}".format(key12,key22))
+            fout.write(str("Key1 : {} \nKey2 : {}\n".format(key12,key22)))
             print(decrypt([key12,key22],message))
+            fout.write(decrypt([key12,key22],message))
     else:
         print("An error occured")
 

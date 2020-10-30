@@ -1,5 +1,8 @@
 import sys
 
+file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Affine/implementation/Affine/input.txt"
+file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Affine/implementation/Affine/output.txt"
+
 CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
 KEYDOMAIN = [ 1,  3,  5,  7,  9,  11,  15,  17,  19,  21,  23,  25 ]  #key domain for key1
 
@@ -43,15 +46,25 @@ def keyValidation(key1, key2):
         sys.exit("The second key should be greater than or equal to zero!!")
 
 def main():
-    message = "ahgd"  #gt pt
-    key1 = 7         #gt keys
-    key2 = 0
+    with open (file_input, 'rt') as myfile:
+        for line in myfile:
+            if line.find("messgae") != -1:    
+                message = line.rstrip('\n').split(" =")[1]
+            elif line.find("key1") != -1:
+                key1 = int(line.rstrip('\n').split(" =")[1])
+            elif line.find("key2") != -1:
+                key2 = int(line.rstrip('\n').split(" =")[1])
+
+    fout = open(file_output, "w+")
+
     keys = [key1, key2]
     keyValidation(keys[0],keys[1])
     cipherText = encrypt(keys,message)
     print(cipherText)
+    fout.write(cipherText)
     plainText = decrypt(keys,cipherText)
-    print(plainText)    
+    print(plainText) 
+    fout.write("\n"+plainText)   
 
 if __name__=="__main__":
     main()

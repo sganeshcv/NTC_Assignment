@@ -7,11 +7,12 @@ TOTAL_CHARACTERS = 4374127904
 
 KEYDOMAIN = [ 1,  3,  5,  7,  9,  11,  15,  17,  19,  21,  23,  25 ]  #key domain for key1
 
-
-MONOGRAM_FILE = '/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Shift/cryptanalysis/english-monograms.txt'
-BIGRAM_FILE = 'english-bigrams.txt'
-TRIGRAM_FILE = 'english-trigrams.txt'
-QUADGRAM_FILE = 'english-quadgrams.txt'
+file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Affine/cryptanalysis/statistic/input.txt"
+file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Affine/cryptanalysis/statistic/output.txt"
+MONOGRAM_FILE = '/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Affine/cryptanalysis/english-monograms.txt'
+# BIGRAM_FILE = 'english-bigrams.txt'
+# TRIGRAM_FILE = 'english-trigrams.txt'
+# QUADGRAM_FILE = 'english-quadgrams.txt'
 
 def mod(num):
     return (num%26)
@@ -56,12 +57,6 @@ def minor(A,i,j):    # Return matrix A with the ith row and jth column deleted
     p=p+1
   return minor
 
-# def getKey(delta_cipher,delta_actual):
-#     return int(delta_cipher/delta_actual)
-
-# def delta_char(c1, c2):
-#     return (CHARACTERS.find(c2) - CHARACTERS.find(c1))
-
 def determineFrequencyDistribution(ciphertext):
     total = 0    
     letter_count = {}
@@ -105,8 +100,13 @@ def decrypt(keys,message):
     return plainText
 
 def main():
-    message = "GWNNBDGNOTIBOKNNNNNNNNNGGGGDTDKRFTAGG"  #gt pt
-    print(message)
+    with open (file_input, 'rt') as myfile:
+        for line in myfile:
+            if line.lower().find("message") != -1:    
+                message = line.rstrip('\n').split(" = ")[1]
+
+    fout = open(file_output, "w+")
+    
     actual_frequency_distribution = readNGram(1)
     ciphertext_frequency_distribution = determineFrequencyDistribution(message.lower())
     
@@ -120,11 +120,13 @@ def main():
     key2 = int(mod(matrix_key)[1])
     if key1 in KEYDOMAIN:
         print("Key1 : {} \nKey2 : {}".format(key1,key2))
+        fout.write("Key1 : {} \nKey2 : {}\n".format(key1,key2))
         #break
     else :
         print("An error occured")
 
     print(decrypt([key1,key2],message))
+    fout.write(decrypt([key1,key2],message))
 
 if __name__ == "__main__":
     main()
