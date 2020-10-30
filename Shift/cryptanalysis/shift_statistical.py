@@ -4,9 +4,9 @@ CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
 TOTAL_CHARACTERS = 4374127904
 
 MONOGRAM_FILE = '/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Shift/cryptanalysis/english-monograms.txt'
-BIGRAM_FILE = 'english-bigrams.txt'
-TRIGRAM_FILE = 'english-trigrams.txt'
-QUADGRAM_FILE = 'english-quadgrams.txt'
+# BIGRAM_FILE = 'english-bigrams.txt'
+# TRIGRAM_FILE = 'english-trigrams.txt'
+# QUADGRAM_FILE = 'english-quadgrams.txt'
 
 def mod26(num):
     return (num%26)
