@@ -1,6 +1,10 @@
 import numpy as np
 import math
 import sys
+
+file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Transposition/cryptanalysis/BruteForce/input.txt"
+file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Transposition/cryptanalysis/BruteForce/output.txt"
+
 CHARACTERS = "abcdefghijklmnopqrstuvwxyz"  
 
 def getfactors(n):
@@ -37,11 +41,18 @@ def decrypt(message,m):
     return getText(message_Matrix)
 
 def main():
-    cipherText = "EYATGNACOHETKNTMTSIZ"
+    with open (file_input, 'rt') as myfile:
+        for line in myfile:
+            if line.find("cipherText") != -1:    
+                cipherText = (line.rstrip('\n').split(" = ")[1])
+    
+    fout = open(file_output, "w+")    
     factors = getfactors(len(cipherText))
     for factor in factors:
         plainText = decrypt(cipherText.lower(),factor)
         print(plainText) #op
+        fout.write(plainText)
+        fout.write("\n")
 
 if __name__ == "__main__":
     main()

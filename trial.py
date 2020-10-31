@@ -77,6 +77,10 @@ def getKetKnowPTAttack(plainText,cipherText):
   return np.dot(mod26MatInv(plainTextMatrix), cipherTextMatrix)
 
 def main():
+
+    file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Affine/cryptanalysis/statistical/input.txt"
+    file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Affine/cryptanalysis/statistical/output.txt"
+
     with open (file_input, 'rt') as myfile:
         for line in myfile:
             if line.find("key_dimension") != -1:    
@@ -86,6 +90,8 @@ def main():
             elif line.find("cipherText") != -1:
                 cipherText = (line.rstrip('\n').split(" = ")[1])
     
+    fout = open(file_output, "w+")
+
     print(plainText)
 
     key = mod26(getKetKnowPTAttack(plainText,cipherText)).astype(int)

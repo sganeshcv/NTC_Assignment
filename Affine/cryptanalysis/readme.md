@@ -8,7 +8,7 @@ ChosenPT:
     Assumptions -- logical assumptions were made following the textbook conventions:
         1. All the input should be given without including any of the special characters or new lines or even whitespace. The input must be given all in small letters. 
         2. Input message (to decrypt) should be given in the input file as "message = <input message to encrypt and decrypt back>"
-        3. The chosen Plain tesxt should be given as "chosen_plainText = <input value of chosen PT>"
+        3. The chosen Plain text should be given as "chosen_plainText = <input value of chosen PT>"
         4. The cipher texts corresponding to that plaintext should be given as "CipherText_corresponding_to_CT1 = <input value for CipherText_corresponding_to_CT1>" and similarly for CipherText_corresponding_to_CT2, but in the next line
         5. The output will be showing both the keys and the decryption of the message
     

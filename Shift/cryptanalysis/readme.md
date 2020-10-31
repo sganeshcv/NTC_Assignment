@@ -27,9 +27,9 @@ knownPT:
     
     Assumptions --
         1. All the input should be given without including any of the special characters or new lines or even whitespace. The input must be given all in small letters. 
-        3. The known cipherText should be given as "cipherText = <input value of cipher Text corresponding to chosen PT>" -- Upper case only
-        4. The plainText_corresponding_to_CT corresponding to that cipher text should be given as "plainText_corresponding_to_CT = <input value for the plain text>"
-        5. The output will be showing the Key used in that pair
+        2. The known cipherText should be given as "cipherText = <input value of cipher Text corresponding to chosen PT>" -- Upper case only
+        3. The plainText_corresponding_to_CT corresponding to that cipher text should be given as "plainText_corresponding_to_CT = <input value for the plain text>"
+        4. The output will be showing the Key used in that pair
 
 ChosenPT:
   Implemented this attack based on the textbook example of chosen plain text attack on Affine Cipher. Here challenger chooses a Plain text of size one and the adversary provided with two possible ciphertexts. The Objective of the challenger was to find the Key and Decrypt another plain text.

@@ -1,3 +1,6 @@
+file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Transposition/cryptanalysis/knownPT/input.txt"
+file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Transposition/cryptanalysis/knownPT/output.txt"
+
 CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
 
 def getfactors(n):
@@ -56,9 +59,16 @@ def decrypt(keys,message):
     return plainText
 
 def main():
-    message = "eemyntaacttkonshitzg"  #gt pt
-    plainText = "indiaismycountryzzzz"
-    cipherText = "diianmiycsnotruzyzzz"
+    with open (file_input, 'rt') as myfile:
+        for line in myfile:
+            if line.find("message") != -1:    
+                message = (line.rstrip('\n').split(" = ")[1])
+            elif line.find("plainText") != -1:
+                plainText = (line.rstrip('\n').split(" = ")[1])
+            elif line.find("cipherText") != -1:
+                cipherText = (line.rstrip('\n').split(" = ")[1]).lower()
+    
+    fout = open(file_output, "w+")
     factors = getfactors(len(message))    
     for factor in factors:
         if factor != 1:
@@ -67,7 +77,10 @@ def main():
                 if(key == -1):
                     continue
                 print(key)
+                fout.write(str(key))
+                fout.write("\n")
                 print(decrypt(key,message))
+                fout.write(decrypt(key,message))
 
 if __name__ == "__main__":
     main()

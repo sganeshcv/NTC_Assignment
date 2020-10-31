@@ -1,5 +1,8 @@
 import sys
 
+file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Transposition/implementation/keyedTransposition/input.txt"
+file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Transposition/implementation/keyedTransposition/output.txt"
+
 CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
 
 def messageValidation(message):
@@ -49,13 +52,20 @@ def decrypt(keys,message):
     return plainText
 
 def main():
-    message = "indiaismycountry"  #gt pt
-    key = [3, 1, 4, 5, 2]         #gtkeys
+    with open (file_input, 'rt') as myfile:
+        for line in myfile:
+            if line.find("message") != -1:    
+                message = (line.rstrip('\n').split(" = ")[1])
+            elif line.find("key") != -1:
+                key = ([int(x) for x in ((line.rstrip('\n').split(" [")[1].rstrip(']').rstrip(',').replace(',',''))).split()])
+    fout = open(file_output, "w+")
     messageValidation(message)
     message = setUpMessage(message,len(key))
     cipherText = encrypt(key,message)
-    print(cipherText)
+    print(cipherText.upper())
+    fout.write(cipherText.upper()+"\n")
     plainText = decrypt(key,cipherText)
+    fout.write(plainText)
     print(plainText) 
 
 if __name__ == "__main__":

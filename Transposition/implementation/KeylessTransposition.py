@@ -1,6 +1,10 @@
 import numpy as np
 import math
 import sys
+
+file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Transposition/implementation/keylessTransposition/input.txt"
+file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Transposition/implementation/keylessTransposition/output.txt"
+
 CHARACTERS = "abcdefghijklmnopqrstuvwxyz"  
 
 def setUpMessage(message,m):
@@ -56,13 +60,19 @@ def decrypt(message,m):
     return getText(message_Matrix)
 
 def main():
-    #get coloumn dimension only
-    m = 4
-    message = "meetmeatthepark"    #get message
+    with open (file_input, 'rt') as myfile:
+        for line in myfile:
+            if line.find("coloumn_length") != -1:    
+                m = int(line.rstrip('\n').split(" = ")[1])
+            elif line.find("message") != -1:
+                message = (line.rstrip('\n').split(" = ")[1])
+    fout = open(file_output, "w+")
     cipherText = encrypt(message,m)
     print(cipherText.upper())
+    fout.write(cipherText.upper() + "\n")
     plainText = decrypt(cipherText,m)
     print(plainText)
-    
+    fout.write(plainText)
+
 if __name__ == "__main__":
     main()

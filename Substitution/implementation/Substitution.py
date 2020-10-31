@@ -1,5 +1,8 @@
 import sys
 
+file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Substitution/implementation/Substitution/input.txt"
+file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Substitution/implementation/Substitution/output.txt"
+
 CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
 
 def keyValidation(key):
@@ -27,12 +30,21 @@ def decrypt(keys,message):
     return plainText
 
 def main():
-    message = "abcdefga"  #gt pt
-    key = "keyabcdfghijlmnopqrstuvwxz"         #gtkeys
+    with open (file_input, 'rt') as myfile:
+        for line in myfile:
+            if line.find("message") != -1:    
+                message = (line.rstrip('\n').split(" = ")[1])
+            elif line.find("key") != -1:
+                key = (line.rstrip('\n').split(" = ")[1])
+            
+    fout = open(file_output, "w+")
     cipherText = encrypt(key,message)
     print(cipherText)
+    fout.write(cipherText)
     plainText = decrypt(key,cipherText)
     print(plainText) 
+    fout.write("\n")
+    fout.write(plainText)
 
 if __name__ == "__main__":
     main()
