@@ -1,4 +1,6 @@
 import sys
+file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Shift/implementation/Shift/input.txt"
+file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Shift/implementation/Shift/output.txt"
 
 CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
 
@@ -32,13 +34,21 @@ def keyValidation(key):
         sys.exit("The key should be greater than or equal to zero!!")
 
 def main():
-    message = "thehouseisnowforsaleforfourmilliondollarsitisworthmorehurrybeforethesellerreceivesmoreoffers"  #gt pt
-    key = 4         #gtkeys
+    with open (file_input, 'rt') as myfile:
+        for line in myfile:
+            if line.find("message") != -1:    
+                message = (line.rstrip('\n').split(" = ")[1])
+            elif line.find("key") != -1:
+                key = int(line.rstrip('\n').split(" = ")[1])
+    fout = open(file_output, "w+")
     keyValidation(key)
     cipherText = encrypt(key,message)
     print(cipherText)
+    fout.write(cipherText)
+    fout.write("\n")
     plainText = decrypt(key,cipherText)
-    print(plainText) 
+    print(plainText)
+    fout.write(plainText) 
 
 if __name__ == "__main__":
     main()

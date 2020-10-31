@@ -1,0 +1,4 @@
+message = XLMWMWRSXWIGYVI
+chosen_CipherText = E
+plainText1_corresponding_to_CT = a
+plainText2_corresponding_to_CT = c

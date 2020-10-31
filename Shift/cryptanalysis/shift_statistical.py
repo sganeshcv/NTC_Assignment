@@ -3,7 +3,10 @@ from heapq import nlargest
 CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
 TOTAL_CHARACTERS = 4374127904
 
-MONOGRAM_FILE = '/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Shift/cryptanalysis/english-monograms.txt'
+file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Shift/cryptanalysis/statistical/input.txt"
+file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Shift/cryptanalysis/statistical/output.txt"
+
+MONOGRAM_FILE = '/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/english-monograms.txt'
 # BIGRAM_FILE = 'english-bigrams.txt'
 # TRIGRAM_FILE = 'english-trigrams.txt'
 # QUADGRAM_FILE = 'english-quadgrams.txt'
@@ -57,7 +60,11 @@ def decrypt(key,message):
     return plainText
 
 def main():
-    message = "XLILSYWIMWRSAJSVWEPIJSVJSYVQMPPMSRHSPPEVWMXMWASVXLQSVILYVVCFIJSVIXLIWIPPIVVIGIMZIWQSVISJJIVW"  #gt pt
+    with open (file_input, 'rt') as myfile:
+        for line in myfile:
+            if line.find("message") != -1:    
+                message = (line.rstrip('\n').split(" = ")[1])
+    fout = open(file_output, "w+")
     print(message)
     actual_frequency_distribution = readNGram(1)
     ciphertext_frequency_distribution = determineFrequencyDistribution(message.lower())
@@ -68,6 +75,7 @@ def main():
     for frequent_char in frequent_char3:
         key = getKey(frequent_char_actual, frequent_char)
         print("{} : {}".format(CHARACTERS[key], decrypt(key,message)))
+        fout.write(("{} : {}\n".format(CHARACTERS[key], decrypt(key,message))))
         #break
 
 if __name__ == "__main__":

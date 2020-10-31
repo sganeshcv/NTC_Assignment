@@ -1,5 +1,8 @@
 CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
 
+file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Shift/cryptanalysis/bruteForce/input.txt"
+file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Shift/cryptanalysis/bruteForce/output.txt"
+
 def mod26(num):
     return (num%26)
 
@@ -14,11 +17,16 @@ def decrypt(key,message):
     return plainText
 
 def main():
-    message = "HIJKLMNN"  #gt pt
+    with open (file_input, 'rt') as myfile:
+        for line in myfile:
+            if line.find("message") != -1:    
+                message = (line.rstrip('\n').split(" = ")[1])
+    fout = open(file_output, "w+")
     print(message)
     for key in range(1,26):
         plainText = decrypt(key,message)
         print("{} : {}".format(key, plainText)) 
+        fout.write("{} : {}\n".format(key, plainText))
 
 if __name__ == "__main__":
     main()
