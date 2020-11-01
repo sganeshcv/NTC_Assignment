@@ -1,0 +1,4 @@
+message = HHWKSWXSLGNTCG
+plain_text = sheisl
+cipher_text1 = HHWKSW
+cipher_text2 = OHOAFW
