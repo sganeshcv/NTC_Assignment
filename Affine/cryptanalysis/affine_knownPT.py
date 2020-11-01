@@ -1,14 +1,12 @@
 from heapq import nlargest 
-# from sage import *
 import numpy as np
 
-file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Affine/cryptanalysis/chosenPT/input.txt"
-file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Affine/cryptanalysis/chosenPT/output.txt"
+file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Affine/cryptanalysis/knownPT/input.txt"
+file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Affine/cryptanalysis/knownPT/output.txt"
 
 CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
 
 KEYDOMAIN = [ 1,  3,  5,  7,  9,  11,  15,  17,  19,  21,  23,  25 ]  #key domain for key1
-
 
 def mod(num):
     return (num%26)
@@ -66,37 +64,23 @@ def decrypt(keys,message):
 def main():
     with open (file_input, 'rt') as myfile:
         for line in myfile:
-            if line.lower().find("message") != -1:    # if case-insensitive match,
-                message = line.rstrip('\n').split(" = ")[1]
-            elif line.find("chosen_plainText") != -1:
+            if line.find("chosen_plainText") != -1:
                 chosen_plainText = line.rstrip('\n').split(" = ")[1]
             elif line.find("CipherText_corresponding_to_CT1") != -1:
                 CipherText_corresponding_to_CT1 = line.rstrip('\n').split(" = ")[1]
-            elif line.find("CipherText_corresponding_to_CT2") != -1:
-                CipherText_corresponding_to_CT2 = line.rstrip('\n').split(" = ")[1]
       
     fout = open(file_output, "w+")
     
     matrix_A = [[CHARACTERS.find(chosen_plainText[0]), 1], [CHARACTERS.find(chosen_plainText[1]), 1]]
     matrix_B = [[CHARACTERS.upper().find(CipherText_corresponding_to_CT1[0])],[CHARACTERS.upper().find(CipherText_corresponding_to_CT1[1])]]
-    matrix_C = [[CHARACTERS.upper().find(CipherText_corresponding_to_CT2[0])],[CHARACTERS.upper().find(CipherText_corresponding_to_CT2[1])]]
     matrix_key1 = np.dot(mod26MatInv(matrix_A),matrix_B)
-    matrix_key2 = np.dot(mod26MatInv(matrix_A),matrix_C)
     key11 = int(mod(matrix_key1)[0])
     key21 = int(mod(matrix_key1)[1])
-    key12 = int(mod(matrix_key2)[0])
-    key22 = int(mod(matrix_key2)[1])
+
     if key11 in KEYDOMAIN:
         print("Key1 : {} \nKey2 : {}".format(key11,key21))
         fout.write(str("Key1 : {} \nKey2 : {}\n".format(key11,key21)))
-        print(decrypt([key11,key21],message))
-        fout.write(decrypt([key11,key21],message))
         #break
-    elif key12 in KEYDOMAIN:
-            print("Key1 : {} \nKey2 : {}".format(key12,key22))
-            fout.write(str("Key1 : {} \nKey2 : {}\n".format(key12,key22)))
-            print(decrypt([key12,key22],message))
-            fout.write(decrypt([key12,key22],message))
     else:
         print("An error occured")
 

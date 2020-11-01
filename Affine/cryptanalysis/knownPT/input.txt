@@ -1,0 +1,2 @@
+chosen_plainText = et
+CipherText_corresponding_to_CT1 = WF

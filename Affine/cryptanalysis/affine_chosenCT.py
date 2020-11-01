@@ -2,8 +2,8 @@ from heapq import nlargest
 # from sage import *
 import numpy as np
 
-file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Affine/cryptanalysis/chosenPT/input.txt"
-file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Affine/cryptanalysis/chosenPT/output.txt"
+file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Affine/cryptanalysis/chosenCT/input.txt"
+file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Affine/cryptanalysis/chosenCT/output.txt"
 
 CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
 
@@ -68,20 +68,20 @@ def main():
         for line in myfile:
             if line.lower().find("message") != -1:    # if case-insensitive match,
                 message = line.rstrip('\n').split(" = ")[1]
-            elif line.find("chosen_plainText") != -1:
-                chosen_plainText = line.rstrip('\n').split(" = ")[1]
-            elif line.find("CipherText_corresponding_to_CT1") != -1:
-                CipherText_corresponding_to_CT1 = line.rstrip('\n').split(" = ")[1]
-            elif line.find("CipherText_corresponding_to_CT2") != -1:
-                CipherText_corresponding_to_CT2 = line.rstrip('\n').split(" = ")[1]
+            elif line.find("chosen_cipherText") != -1:
+                chosen_cipherText = line.rstrip('\n').split(" = ")[1]
+            elif line.find("PlainText_corresponding_to_CT1") != -1:
+                PlainText_corresponding_to_CT1 = line.rstrip('\n').split(" = ")[1]
+            elif line.find("PlainText_corresponding_to_CT2") != -1:
+                PlainText_corresponding_to_CT2 = line.rstrip('\n').split(" = ")[1]
       
     fout = open(file_output, "w+")
     
-    matrix_A = [[CHARACTERS.find(chosen_plainText[0]), 1], [CHARACTERS.find(chosen_plainText[1]), 1]]
-    matrix_B = [[CHARACTERS.upper().find(CipherText_corresponding_to_CT1[0])],[CHARACTERS.upper().find(CipherText_corresponding_to_CT1[1])]]
-    matrix_C = [[CHARACTERS.upper().find(CipherText_corresponding_to_CT2[0])],[CHARACTERS.upper().find(CipherText_corresponding_to_CT2[1])]]
-    matrix_key1 = np.dot(mod26MatInv(matrix_A),matrix_B)
-    matrix_key2 = np.dot(mod26MatInv(matrix_A),matrix_C)
+    matrix_A = [[CHARACTERS.upper().find(chosen_cipherText[0])], [CHARACTERS.upper().find(chosen_cipherText[1])]]
+    matrix_B = [[CHARACTERS.find(PlainText_corresponding_to_CT1[0]), 1],[CHARACTERS.find(PlainText_corresponding_to_CT1[1]), 1]]
+    matrix_C = [[CHARACTERS.find(PlainText_corresponding_to_CT2[0]), 1],[CHARACTERS.find(PlainText_corresponding_to_CT2[1]), 1]]
+    matrix_key1 = np.dot(mod26MatInv(matrix_B),matrix_A)
+    matrix_key2 = np.dot(mod26MatInv(matrix_C),matrix_A)
     key11 = int(mod(matrix_key1)[0])
     key21 = int(mod(matrix_key1)[1])
     key12 = int(mod(matrix_key2)[0])
@@ -99,7 +99,6 @@ def main():
             fout.write(decrypt([key12,key22],message))
     else:
         print("An error occured")
-
 
 if __name__ == "__main__":
     main()
