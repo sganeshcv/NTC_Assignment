@@ -1,0 +1,4 @@
+message = eemyntaacttkonshitzg
+plainText = indiaismycountryzzzz
+cipherText1 = DIIANMIYCSNOTRUZYZZZ
+cipherText2 = AIDNICYMSIRTNUOZZZZY

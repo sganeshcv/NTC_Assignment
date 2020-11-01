@@ -1,5 +1,5 @@
-file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Transposition/cryptanalysis/knownPT/input.txt"
-file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Transposition/cryptanalysis/knownPT/output.txt"
+file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Transposition/cryptanalysis/chosenCT/input.txt"
+file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Transposition/cryptanalysis/chosenCT/output.txt"
 
 CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
 
@@ -63,24 +63,29 @@ def main():
         for line in myfile:
             if line.find("message") != -1:    
                 message = (line.rstrip('\n').split(" = ")[1])
-            elif line.find("plainText") != -1:
-                plainText = (line.rstrip('\n').split(" = ")[1])
             elif line.find("cipherText") != -1:
                 cipherText = (line.rstrip('\n').split(" = ")[1]).lower()
+            elif line.find("plainText1") != -1:
+                plainText1 = (line.rstrip('\n').split(" = ")[1]).lower()
+            elif line.find("plainText2") != -1:
+                plainText2 = (line.rstrip('\n').split(" = ")[1]).lower()
     
     fout = open(file_output, "w+")
-    factors = getfactors(len(message))    
+    factors = getfactors(len(message)) 
+    plainTexts = [plainText1, plainText2]   
     for factor in factors:
         if factor != 1:
-            if checkfactorValidation(factor,plainText,cipherText):
-                key = splitGetKey(factor,plainText,cipherText)
-                if(key == -1):
-                    continue
-                print(key)
-                fout.write(str(key))
-                fout.write("\n")
-                print(decrypt(key,message))
-                fout.write(decrypt(key,message))
+            for plainText in plainTexts:
+                if checkfactorValidation(factor,plainText,cipherText):
+                    key = splitGetKey(factor,plainText,cipherText)
+                    if(key == -1):
+                        continue
+                    print(key)
+                    fout.write(str(key))
+                    fout.write(": ")
+                    print(decrypt(key,message))
+                    fout.write(decrypt(key,message)+"\n")
+    print("Now we can clearly see the correct key")
 
 if __name__ == "__main__":
     main()
