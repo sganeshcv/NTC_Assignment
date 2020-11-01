@@ -1,0 +1,4 @@
+message = ICFVQRVVNEFVRNVSIYRGAHSLIOJICNHTIYBFGTICRXRS
+chosen_cipherText = ABCDEFGHIJKLMNOPQRSTUVWXYZ
+PlainText_corresponding_to_CT1 = kxvmcnophqrszyijadlegwbuft
+PlainText_corresponding_to_CT2 = cfhlginrtuqpvabwmeydjszkox
