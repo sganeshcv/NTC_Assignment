@@ -7,7 +7,7 @@ Assumptions -- logical assumptions were made following the textbook conventions:
     2. Input key_dimension should be given in the input file as "key_dimension = <input key_dimension>" --integer
     3. key -> key should be given as a string "key = <input key value as string>" which will be later changed as a matrix in Z26
     4. Input message should be given in the input file as "message = <input message to encrypt and decrypt back>"
-    4. Output will be of the form "<encrypted message(in CAPS)> \n <decrypted message (input given)>"
+    5. Output will be of the form "<encrypted message(in CAPS)> \n <decrypted message (input given)>"
 
 Input : ./Hill/input.txt
 Output : ./Hill/output.txt

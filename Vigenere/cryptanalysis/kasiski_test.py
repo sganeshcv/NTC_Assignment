@@ -2,6 +2,9 @@ import sys
 from fractions import gcd
 from functools import reduce
 
+file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Vigenere/cryptanalysis/kasiski_test/input.txt"
+file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Vigenere/cryptanalysis/kasiski_test/output.txt"
+
 
 TOTAL_CHARACTERS = 4374127904
 CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
@@ -107,7 +110,12 @@ def printDecryptedMessage(split,split_sentenses,max_len):
     return message
 
 def main():
-    message = "LIOMWGFEGGDVWGHHCQUCRHRWAGWIOWQLKGZETKKMEVLWPCZVGTHVTSGXQOVGCSVETQLTJSUMVWVEUVLXEWSLGFZMVVWLGYHCUSWXQHKVGSHEEVFLCFDGVSUMPHKIRZDMPHHBVWVWJWIXGFWLTSHGJOUEEHHVUCFVGOWICQLTJSUXGLW"  #gt pt
+    with open (file_input, 'rt') as myfile:
+        for line in myfile:
+            if line.find("message") != -1:    
+                message = (line.rstrip('\n').split(" = ")[1])
+
+    fout = open(file_output, "w+")    
     split = getSplit(message)
     max_len = len(message)
     split_sentenses = setSplitSentences(split,message)
@@ -133,6 +141,8 @@ def main():
         decrypt_messages.pop()
         decrypt_messages.append(last_text)
         print(printDecryptedMessage(split,decrypt_messages,max_len))
+        fout.write(printDecryptedMessage(split,decrypt_messages,max_len)+ "\n")
+
 
     print("Now we can clearly see the actual plaintext from the above list")
 if __name__ == "__main__":

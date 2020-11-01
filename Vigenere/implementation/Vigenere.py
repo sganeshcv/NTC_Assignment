@@ -1,5 +1,8 @@
 import sys
 
+file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Vigenere/implementation/Vigenere/input.txt"
+file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Vigenere/implementation/Vigenere/output.txt"
+
 CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
 
 def mod26(num):
@@ -39,13 +42,21 @@ def keyValidation(keys):
             sys.exit("The key should be greater than or equal to zero!!")
 
 def main():
-    message = "abcdefgah"  #gt pt
-    key0 = "ab"         #gtkeys
+    with open (file_input, 'rt') as myfile:
+        for line in myfile:
+            if line.find("message") != -1:    
+                message = (line.rstrip('\n').split(" = ")[1])
+            elif line.find("key") != -1:
+                key0 = (line.rstrip('\n').split(" = ")[1])
+    
+    fout = open(file_output, "w+")
     keyValidation(key0)
     key = setKey(key0,message)
     cipherText = encrypt(key,message)
     print(cipherText)
+    fout.write(cipherText+ "\n")
     plainText = decrypt(key,cipherText)
+    fout.write(plainText)
     print(plainText) 
 
 if __name__ == "__main__":
