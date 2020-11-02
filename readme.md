@@ -1,4 +1,6 @@
-All the files related to a particular cipher are its cryptanalysis are inside the respective folders. Each folder also has a readme file that describes the process and the assumptions taken. All the files are written in python. The input and  output files are inside all the respective folders. The file path is written in accordance my file system. Before executing the code change the file_input, file_output variables.
+All the files related to a particular cipher are its cryptanalysis are inside the respective folders. Each folder also has a readme file that describes the process and the assumptions taken. 
+
+All the files are written in python. The input and  output files are inside all the respective folders. The file path is written in accordance my file system. Before executing the code change the file_input, file_output variables.
 
 The plain text for input or output is completely in lower case and the cipher text in upper case.
 
