@@ -43,6 +43,8 @@ ChosenPT:
         4. The cipher texts corresponding to that plaintext should be given as "CipherText_corresponding_to_CT1 = <input value for CipherText_corresponding_to_CT1>" and similarly for CipherText_corresponding_to_CT2, but in the next line
         5. The output will be showing both the keys and the decryption of the message
 
+  ** A special for the attack would be giving the same character of size 2 as in input and getting different CTs with one having the same characters and the other having different in such a case the answers is obvious => the one with same charcters is the correpocnding CT. 
+
 ChosenCT:
     This is similar to the chosen Plain text attack except here the challenger choses a cipher text insead of a plain text and is provided with some possible plain text. (S)he has to figure out the key and therefore encrypt the additional message provided. 
      Input : ./chosenPT/input.txt
@@ -53,6 +55,8 @@ ChosenCT:
         3. The chosen cipher text should be given as "chosen_CipherText = <input value of chosen CT>"
         4. The plain texts corresponding to that cipher text should be given as "plainText1_corresponding_to_CT = <input value for plainText1 corresponding to CT>" and similarly for plainText2_corresponding_to_CT, but in the next line
         5. The output will be showing both the keys and the decryption of the message
+
+  ** The similar specal case (chosen PT) is also applicable here. 
 
 
 *Note: use space characters after and before "=" in input as given in the file
