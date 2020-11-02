@@ -2,8 +2,8 @@ import numpy as np
 import math
 import sys
 
-file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Transposition/implementation/keylessTransposition/input.txt"
-file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Transposition/implementation/keylessTransposition/output.txt"
+file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Transposition/implementation/keylessTransposition/B170763CS_Sreeganesh_5_KeylessTransposition_I.txt"
+file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Transposition/implementation/keylessTransposition/B170763CS_Sreeganesh_5_KeylessTransposition_O.txt"
 
 CHARACTERS = "abcdefghijklmnopqrstuvwxyz"  
 

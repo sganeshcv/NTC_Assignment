@@ -2,8 +2,8 @@ import numpy as np
 import math
 import sys
 
-file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Hill/implementation/Hill/input.txt"
-file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Hill/implementation/Hill/output.txt"
+file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Hill/implementation/Hill/B17063CS_Sreeganesh_2_I.txt"
+file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Hill/implementation/Hill/B17063CS_Sreeganesh_2_O.txt"
 
 CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
 

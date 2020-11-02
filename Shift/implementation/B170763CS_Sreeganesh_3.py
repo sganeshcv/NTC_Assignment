@@ -1,6 +1,6 @@
 import sys
-file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Shift/implementation/Shift/input.txt"
-file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Shift/implementation/Shift/output.txt"
+file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Shift/implementation/Shift/B17063CS_Sreeganesh_3_I.txt"
+file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Shift/implementation/Shift/B17063CS_Sreeganesh_3_O.txt"
 
 CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
 

@@ -1,7 +1,7 @@
 import sys
 
-file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Transposition/implementation/keyedTransposition/input.txt"
-file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Transposition/implementation/keyedTransposition/output.txt"
+file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Transposition/implementation/keyedTransposition/B170763CS_Sreeganesh_5_KeyedTransposition_I.txt"
+file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Transposition/implementation/keyedTransposition/B170763CS_Sreeganesh_5_KeyedTransposition_O.txt"
 
 CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
 

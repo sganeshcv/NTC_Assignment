@@ -1,7 +1,7 @@
 import sys
 
-file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Vigenere/implementation/Vigenere/input.txt"
-file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Vigenere/implementation/Vigenere/output.txt"
+file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Vigenere/implementation/Vigenere/B170763CS_Sreeganesh_6_I.txt"
+file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Vigenere/implementation/Vigenere/B170763CS_Sreeganesh_6_O.txt"
 
 CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
 

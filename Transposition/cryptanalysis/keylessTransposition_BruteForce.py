@@ -2,8 +2,8 @@ import numpy as np
 import math
 import sys
 
-file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Transposition/cryptanalysis/BruteForce/input.txt"
-file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Transposition/cryptanalysis/BruteForce/output.txt"
+file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Transposition/cryptanalysis/bruteforce/input.txt"
+file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Transposition/cryptanalysis/bruteforce/output.txt"
 
 CHARACTERS = "abcdefghijklmnopqrstuvwxyz"  
 

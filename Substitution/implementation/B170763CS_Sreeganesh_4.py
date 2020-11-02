@@ -1,7 +1,7 @@
 import sys
 
-file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Substitution/implementation/Substitution/input.txt"
-file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Substitution/implementation/Substitution/output.txt"
+file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Substitution/implementation/Substitution/B170763CS_Sreeganesh_4_I.txt"
+file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Substitution/implementation/Substitution/B170763CS_Sreeganesh_4_O.txt"
 
 CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
 
