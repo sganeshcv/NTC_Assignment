@@ -1,0 +1,120 @@
+import numpy as np
+import math
+import sys
+
+file_input = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Hill/cryptanalysis/chosenPT/input.txt"
+file_output = "/media/sreeganesh/Windows/Users/GMachine/Documents/Studies/S7/NTC/NTC_Assignment/Hill/cryptanalysis/chosenPT/output.txt"
+
+CHARACTERS = "abcdefghijklmnopqrstuvwxyz"
+KEYDOMAIN = [ 1,  3,  5,  7,  9,  11,  15,  17,  19,  21,  23,  25 ]  #key domain for key1
+
+fout = open(file_output, "w+")    
+
+def mod26(num):
+    return (num%26)
+
+def setUpMessage(message,m):
+    message_length = len(message)
+    nearest_int = int(message_length/m)
+    new_message_length = (nearest_int + 1)*m
+    i = 0
+    while i < (int(new_message_length - message_length)):
+        message += "z"
+        i += 1
+    return message
+
+def invExist1(num):
+    if num not in KEYDOMAIN:
+        return False
+    return True
+
+def mod26MatInv(A):       # Finds the inverse of matrix A mod p
+  n = len(A)
+  p = 26
+  A=np.matrix(A)
+  adj=np.zeros(shape=(n,n))
+  for i in range(0,n):
+    for j in range(0,n):
+      adj[i][j]=((-1)**(i+j)*int(round(np.linalg.det(minor(A,j,i)))))%p
+  return (modInv(int(round(np.linalg.det(A))),p)*adj)%p
+
+def modInv(a,p):          # Finds the inverse of a mod p, if it exists
+  for i in range(1,p):
+    if (i*a)%p==1:
+      return i
+  fout.write(str(ValueError(str(a)+" has no inverse mod "+str(p))))
+  raise ValueError(str(a)+" has no inverse mod "+str(p))
+
+def minor(A,i,j):    # Return matrix A with the ith row and jth column deleted
+  A=np.array(A)
+  minor=np.zeros(shape=(len(A)-1,len(A)-1))
+  p=0
+  for s in range(0,len(minor)):
+    if p==i:
+      p=p+1
+    q=0
+    for t in range(0,len(minor)):
+      if q==j:
+        q=q+1
+      minor[s][t]=A[p][q]
+      q=q+1
+    p=p+1
+  return minor
+
+def getMatrix(message,m):
+    coloumn = m
+    row = int(len(message)/m)
+    keyMatrix = np.zeros((row,coloumn)) #numberize
+    c = 0
+    for i in range(row):
+        for j in range(coloumn):
+            keyMatrix[i][j] = CHARACTERS.find(message[c])
+            c += 1
+    return keyMatrix
+
+def getText(message):
+    messgaeText = ""
+    row = message.shape[0]
+    coloumn = message.shape[1]
+    for i in range(row):
+        for j in range(coloumn):
+            messgaeText += CHARACTERS[mod26(int(message[i][j]))]
+    return messgaeText
+
+def getKetKnowPTAttack(plainText,cipherText,m):
+  plainTextMatrix = getMatrix(plainText,m)
+  cipherTextMatrix = getMatrix(cipherText,m)
+  return np.dot(mod26MatInv(plainTextMatrix), cipherTextMatrix)
+
+def decrypt(key, message,m):
+  keyMatrix = key#keyMatrix = getMatrix(key)
+  keyMatrixInverse = mod26MatInv(keyMatrix)
+  messageVector = getMatrix(message,m)
+  plainText = np.dot(messageVector,keyMatrixInverse)
+  return getText(plainText)
+
+def main():
+  with open (file_input, 'rt') as myfile:
+    for line in myfile:
+        if line.find("message") != -1:
+            message = line.rstrip('\n').split(" = ")[1]
+        elif line.find("key_dimension") != -1:    
+            key_dimension = int(line.rstrip('\n').split(" = ")[1])
+        elif line.find("plainText") != -1:
+            plainText = (line.rstrip('\n').split(" = ")[1])
+        elif line.find("cipherText1") != -1:
+            cipherText1 = (line.rstrip('\n').split(" = ")[1]).lower()
+        elif line.find("cipherText2") != -1:
+            cipherText2 = (line.rstrip('\n').split(" = ")[1]).lower()
+#   fout = open(file_output, "w+")    
+  cipherTexts = [cipherText1, cipherText2]
+  print(getMatrix(plainText,key_dimension))
+  for cipherText in cipherTexts:
+    key = mod26(getKetKnowPTAttack(plainText,cipherText,key_dimension)).astype(int)
+    print(key)
+    print(decrypt(key,message,key_dimension))
+    fout.write(str(key) + ":    " + decrypt(key,message,key_dimension) + "\n")
+
+    
+if __name__ == "__main__":
+    main()

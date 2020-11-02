@@ -1,0 +1,4 @@
+[[ 2  3  7]
+ [ 5  7  9]
+ [ 1  2 11]]:    kfgkfgkfgkfg
+-1020 has no inverse mod 26

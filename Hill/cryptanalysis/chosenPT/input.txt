@@ -1,0 +1,5 @@
+message = OHKNIHGHFISS
+key_dimension = 3
+plainText = fhknrhafe
+cipherText1 = DGAOQJDRL
+cipherText2 = JDRLDGAOQ
